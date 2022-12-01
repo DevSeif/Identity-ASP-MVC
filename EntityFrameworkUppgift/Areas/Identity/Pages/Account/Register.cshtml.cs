@@ -104,6 +104,14 @@ namespace EntityFrameworkUppgift.Areas.Identity.Pages.Account
 
             [Required]
             public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Birth date")]
+            public string BirthDate { get; set; }
+
+            [Required]
+            [Display(Name = "Admin")]
+            public bool CheckAdmin { get; set; }
         }
 
 
@@ -123,6 +131,7 @@ namespace EntityFrameworkUppgift.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                user.BirthDate = Input.BirthDate;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -130,6 +139,12 @@ namespace EntityFrameworkUppgift.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+
+                    await _userManager.AddToRoleAsync(user, "User");
+                    if (Input.CheckAdmin == true)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -162,20 +177,6 @@ namespace EntityFrameworkUppgift.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
-        }
-
-        private ApplicationUser CreateUser()
-        {
-            try
-            {
-                return Activator.CreateInstance<ApplicationUser>();
-            }
-            catch
-            {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-            }
         }
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

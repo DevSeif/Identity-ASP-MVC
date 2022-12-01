@@ -1,15 +1,20 @@
 ﻿@model PeopleViewModel
 
 @{
-    ViewData["Title"] = "Cities";
+    ViewData["Title"] = "Languages";
 }
 
-<div class="text-center">
-    <form asp-action="AddLanguage" method="post">
-        <input type="text" name="LanguageName" placeholder="Language name">
-        <input type="submit" value="Add language" class="btn btn-primary">
-    </form>
-</div>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="text-center">
+        <form asp-action="AddLanguage" method="post">
+            <input type="text" name="LanguageName" placeholder="Language name">
+            <input type="submit" value="Add language" class="btn btn-primary">
+        </form>
+    </div>
+}
+
+
 
 <table class="table">
     <thead>
@@ -44,10 +49,14 @@
     </tbody>
 </table>
 
-<div class="text-center">
-    <form asp-action="AddLanguageToPerson" method="post">
-        <select id="selectlist2" name="PersonId" asp-items="@ViewBag.People"></select>
-        <select id="selectlist" name="LanguageId" asp-items="@ViewBag.Languages"></select>
-        <input type="submit" value="Add language" class="btn btn-primary">
-    </form>
-</div>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div class="text-center">
+        <form asp-action="AddLanguageToPerson" method="post">
+            <select id="selectlist2" name="PersonId" asp-items="@ViewBag.People"></select>
+            <select id="selectlist" name="LanguageId" asp-items="@ViewBag.Languages"></select>
+            <input type="submit" value="Add language" class="btn btn-primary">
+        </form>
+    </div>
+}

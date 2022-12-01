@@ -1,12 +1,15 @@
 ﻿using EntityFrameworkUppgift.Data;
 using EntityFrameworkUppgift.Models;
 using EntityFrameworkUppgift.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace EntityFrameworkUppgift.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -38,6 +41,43 @@ namespace EntityFrameworkUppgift.Controllers
                 _context.SaveChanges();
             }
 
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditPage(int id)
+        {
+            City city = _context.Cities.Find(id);
+            CityViewModel cityViewModel = new CityViewModel();
+
+            cityViewModel.Name = city.CityName;
+            cityViewModel.CityId = id;
+            cityViewModel.CountryId = city.CountryId;
+
+            ViewBag.Countries = new SelectList(_context.Countries, "CountryId", "CountryName");
+
+            return View(cityViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditCity(CityViewModel cityViewModel)
+        {
+            City city = _context.Cities.Find(cityViewModel.CityId);
+
+            if (ModelState.IsValid)
+            {
+                city.CityName = cityViewModel.Name;
+                city.CountryId = cityViewModel.CountryId;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            City city = _context.Cities.Find(id);
+            _context.Cities.Remove(city);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

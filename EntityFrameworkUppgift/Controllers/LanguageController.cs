@@ -1,12 +1,15 @@
 ﻿using EntityFrameworkUppgift.Data;
 using EntityFrameworkUppgift.Models;
 using EntityFrameworkUppgift.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace EntityFrameworkUppgift.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         readonly ApplicationDbContext _context;

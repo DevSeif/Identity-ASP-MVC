@@ -4,6 +4,7 @@ using EntityFrameworkUppgift.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntityFrameworkUppgift.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221130081847_Roles and admin account")]
+    partial class Rolesandadminaccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +31,6 @@ namespace EntityFrameworkUppgift.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("BirthDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CheckAdmin")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -104,11 +99,9 @@ namespace EntityFrameworkUppgift.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0093be2c-cc92-4c6d-b49d-20750c2911b7",
+                            Id = "a89f9ba8-e68a-4eba-a8a9-f98831e83af5",
                             AccessFailedCount = 0,
-                            BirthDate = "2000-01-01",
-                            CheckAdmin = false,
-                            ConcurrencyStamp = "6ac700c5-872b-4517-a6bf-0d1871fd370d",
+                            ConcurrencyStamp = "86c6de9d-b0cf-4738-8853-756c7faabd4f",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -116,9 +109,9 @@ namespace EntityFrameworkUppgift.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE2gpNiI6AhVFgYfN01givXnQ5WyFQOxZiA/s1zRMzbjdFvvTpx46D6jOKq6PUV5Jw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPG4Gu3H9/6CUGrxVS6tUN0+bJBT3FiZreHlhnrSmT5hHV5qe5Rn+MnIDNBUj7JrqA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fa3387e4-b5a3-4b8a-b031-4ad7b334f488",
+                            SecurityStamp = "647d736e-e1e7-4aed-839b-7227a31f98db",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -420,15 +413,15 @@ namespace EntityFrameworkUppgift.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ffcc3a6b-4f94-4d76-8a29-59a09d1e7e50",
-                            ConcurrencyStamp = "158333e5-72c1-41e1-8369-346ea740fe7f",
+                            Id = "96d7ae48-f9f3-4eea-84be-25d17d446829",
+                            ConcurrencyStamp = "1e6dc361-b263-42e6-95f7-eca4e850a295",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "09e7bc73-36a6-4787-a11b-bad9c3b931b0",
-                            ConcurrencyStamp = "6b8c16b5-3a10-4b7b-b541-cadc5be09930",
+                            Id = "22dfe03b-d653-4d75-9cdc-08a2fafcc9b6",
+                            ConcurrencyStamp = "64204c5a-5c34-4985-a8a7-8841d3176bbf",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -525,8 +518,8 @@ namespace EntityFrameworkUppgift.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "0093be2c-cc92-4c6d-b49d-20750c2911b7",
-                            RoleId = "ffcc3a6b-4f94-4d76-8a29-59a09d1e7e50"
+                            UserId = "a89f9ba8-e68a-4eba-a8a9-f98831e83af5",
+                            RoleId = "96d7ae48-f9f3-4eea-84be-25d17d446829"
                         });
                 });
 

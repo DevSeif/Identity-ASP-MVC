@@ -9,5 +9,6 @@ namespace EntityFrameworkUppgift.ViewModels
 
         [Required]
         public string CountryName { get; set; }
+        public int CountryId { get; set; }
     }
 }
